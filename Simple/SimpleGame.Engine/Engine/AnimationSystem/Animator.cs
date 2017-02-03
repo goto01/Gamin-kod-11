@@ -31,6 +31,7 @@ namespace SimpleGame.Engine.Engine.AnimationSystem
                 Debug.Log("Try to set animation wich doesn't exist - " + name);
                 Game.QuitFlag = true;
             }
+            if (_currentAnimation != null && _currentAnimation.Name.Equals(name)) return;
             _currentAnimation?.Stop();
             _currentAnimation = _animations[name];
             _currentAnimation.Start();

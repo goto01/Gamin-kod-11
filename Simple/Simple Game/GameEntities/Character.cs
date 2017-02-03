@@ -20,11 +20,17 @@ namespace Simple_Game.GameEntities
         public override void Update()
         {
             base.Update();
-
             if (Input.GetKey(SDL.SDL_Keycode.SDLK_LEFT))
+            {
                 TranslateHorizontal(-Offset);
-            if (Input.GetKey(SDL.SDL_Keycode.SDLK_RIGHT))
+                _animator.PlayAnimation("run");
+            }
+            else if (Input.GetKey(SDL.SDL_Keycode.SDLK_RIGHT))
+            {
                 TranslateHorizontal(Offset);
+                _animator.PlayAnimation("run");
+            }
+            else _animator.PlayAnimation("idle");
         }
 
         public Character(Sprite sprite, Animator animator) : base(sprite, animator)

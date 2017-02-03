@@ -5,7 +5,7 @@ namespace SimpleGame.Engine.Engine.EntitieSystem.Entities
 {
     public abstract class AnimatedGameEntity : SpriteGameEntity
     {
-        private readonly Animator _animator;
+        protected readonly Animator _animator;
 
         protected AnimatedGameEntity(Sprite sprite, Animator animator) : base(sprite)
         {

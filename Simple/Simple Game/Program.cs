@@ -63,7 +63,16 @@ namespace Simple_Game
                     birdSprite5,
                     birdSprite6,
                 }, .1f, false);
-            return new Character(birdSprite0, new Animator(new Animation[] {animation}));
+            var animationRun = new Animation("run",
+                new Sprite[]
+                {
+                    birdSprite2,
+                    birdSprite3,
+                    birdSprite4,
+                    birdSprite5,
+                    birdSprite6,
+                }, .05f, false);
+            return new Character(birdSprite0, new Animator(new Animation[] {animation, animationRun}));
         }
 
         static void Main(string[] args)

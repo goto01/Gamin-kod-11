@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FA9BE0F8-4A0F-42A9-815C-13D84EF4F463}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SimpleGame.Engine</RootNamespace>
+    <AssemblyName>SimpleGame.Engine</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assemblies\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SDL2-CS">
+      <HintPath>..\Assemblies\SDL2-CS.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Engine\AnimationSystem\Animation.cs" />
+    <Compile Include="Engine\AnimationSystem\Animator.cs" />
+    <Compile Include="Engine\Core\Debug.cs" />
+    <Compile Include="Engine\Core\Domain\Sprite.cs" />
+    <Compile Include="Engine\Core\Domain\Texture.cs" />
+    <Compile Include="Engine\Core\Domain\Vector2.cs" />
+    <Compile Include="Engine\Core\Game.cs" />
+    <Compile Include="Engine\Core\GameEntitySingleton.cs" />
+    <Compile Include="Engine\Core\Resources.cs" />
+    <Compile Include="Engine\Core\SDLHelpers\MarshalHelper.cs" />
+    <Compile Include="Engine\EntitieSystem\Entities\AnimatedGameEntity.cs" />
+    <Compile Include="Engine\EntitieSystem\Entities\GameEntity.cs" />
+    <Compile Include="Engine\EntitieSystem\Entities\RenderableGameEntity.cs" />
+    <Compile Include="Engine\EntitieSystem\Entities\SpriteGameEntity.cs" />
+    <Compile Include="Engine\EntitieSystem\GameEntityContainer.cs" />
+    <Compile Include="Engine\EntitieSystem\Entities\SimpleGameEntity.cs" />
+    <Compile Include="Engine\SDLEventHandler\Time.cs" />
+    <Compile Include="Engine\SDLRenderer\Renderer.cs" />
+    <Compile Include="Engine\SDLEventHandler\Input.cs" />
+    <Compile Include="Engine\SDLEventHandler\SDLEventsHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

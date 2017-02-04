@@ -26,9 +26,12 @@ namespace Simple_Game.Controllers.InputController
 
         }
 
-        public bool CheckVariat(string variant)
+        public bool TryToSwitchScene(string variant)
         {
-            return variant.Equals(CurrentScene.TextVariant, StringComparison.InvariantCultureIgnoreCase);
+            if (variant.Equals(CurrentScene.TextVariant, StringComparison.InvariantCultureIgnoreCase))
+                SwitchScene();
+            else return false;
+            return true;
         }
 
         public void SwitchScene()

@@ -49,6 +49,14 @@ namespace SimpleGame.Engine.Engine.EntitieSystem
             }
         }
 
+        public static void UpdateCoroutines()
+        {
+            for (var index = 0; index < _entityArray.Length; index++)
+            {
+                if (_entityArray[index] != null) _entityArray[index].UpdateCoroutines();
+            }
+        }
+
         public static void Update()
         {
             _renderQueue.Clear();

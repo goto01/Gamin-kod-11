@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
 using SDL2;
+using SimpleGame.Engine.Engine.Core;
+using SimpleGame.Engine.Engine.Core.Domain;
 using SimpleGame.Engine.Engine.EntitieSystem.Entities;
 using Simple_Game.Controllers.InputController;
 
@@ -20,7 +23,15 @@ namespace Simple_Game.GameEntities.Text
         {
             UpdateContent();
             SetFirstCharToUpper();
-            if (InputController.Instance.GetEnterDown() && SceneController.Instance.CheckVariat(_text)) SceneController.Instance.SwitchScene();
+            if (InputController.Instance.GetEnterDown()) UpdateEnter();
+        }
+
+        private void UpdateEnter()
+        {
+            if (!SceneController.Instance.TryToSwitchScene(_text))
+                StartCoroutine(Shake());
+            else 
+                StartCoroutine(Reset());
         }
 
         private void UpdateContent()
@@ -37,6 +48,27 @@ namespace Simple_Game.GameEntities.Text
             var chars = _text.ToCharArray();
             chars[0] = char.ToUpper(chars[0]);
             _text = new string(chars);
+        }
+
+        private IEnumerator Reset()
+        {
+            while (!string.IsNullOrEmpty(_text))
+            {
+                _text = _text.Substring(0, _text.Length - 1);
+                yield return null;
+            }
+        }
+
+        private IEnumerator Shake()
+        {
+            int time = 0;
+            Vector2 origin = Position;
+            var random = new Random();
+            while (time++ < 20)
+            {
+                Position = origin + new Vector2((float) random.Next(-10, 10), (float) random.Next(-10, 10));
+                yield return null;
+            }
         }
     }
 }

@@ -55,6 +55,7 @@ namespace SimpleGame.Engine.Engine.Core
 
         public static void Update()
         {
+            GameEntityContainer.UpdateCoroutines();
             GameEntityContainer.Update();
         }
 

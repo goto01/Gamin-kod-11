@@ -8,8 +8,14 @@ namespace SimpleGame.Engine.Engine.EntitieSystem.Entities
     public abstract class TextGameEntity : SpriteGameEntity
     {
         private IntPtr _font;
-        private string _text;
+        protected string _text;
         private SDL.SDL_Color _solidColor;
+
+        public string Text
+        {
+            get { return _text;}
+            set { _text = value; }
+        }
 
         public TextGameEntity(IntPtr font, SDL.SDL_Color solidColor, string text) : base(null)
         {
@@ -20,9 +26,10 @@ namespace SimpleGame.Engine.Engine.EntitieSystem.Entities
 
         public override void RenderToRenderer(IntPtr renderer)
         {
-            var surface = SDL_ttf.TTF_RenderText_Solid(_font, _text, _solidColor);
+            var surface = SDL_ttf.TTF_RenderUTF8_Solid(_font, _text, _solidColor);
+            if (surface == default (IntPtr)) return;
             var surfaceStructure = MarshalHelper.GetObjectFromPointer<SDL.SDL_Surface>(surface);
-            var textrue = new Texture(SDL.SDL_CreateTextureFromSurface(renderer, surface), surfaceStructure.w, surfaceStructure.h);
+            var textrue = new Texture(SDL.SDL_CreateTextureFromSurface(renderer, surface), surfaceStructure.w, surfaceStructure.h, 2);
             _sprite = new Sprite(textrue);
             SDL.SDL_FreeSurface(surface);
             base.RenderToRenderer(renderer);

@@ -9,6 +9,7 @@ using SimpleGame.Engine.Engine.EntitieSystem.Entities;
 using SimpleGame.Engine.Engine.SDLEventHandler;
 using Simple_Game.Controllers.InputController;
 using Simple_Game.GameEntities;
+using Simple_Game.GameEntities.Text;
 
 namespace Simple_Game
 {
@@ -81,7 +82,7 @@ namespace Simple_Game
         private static TextGameEntity GetTitle()
         {
             var font = Resources.LoadFont("Pecita.ttf");
-            return new TextGameEntity(font, new SDL.SDL_Color() {r = 255, g = 255, b = 255, a = 255}, "Hello, World!") {Pivot = new Vector2(.5f, 0), Position = new Vector2(400, 550)};
+            return new InputTextEntity(font, new SDL.SDL_Color() {r = 255, g = 255, b = 255, a = 255}, "") {Pivot = new Vector2(.5f, .5f), Position = new Vector2(400, 550)};
         }
 
         static void Main(string[] args)

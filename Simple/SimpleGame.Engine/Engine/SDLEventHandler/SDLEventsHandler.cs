@@ -7,6 +7,7 @@ namespace SimpleGame.Engine.Engine.SDLEventHandler
     {
         public static void HandleEventsPool()
         {
+            Input.Clear();
             Time.UpdateTime();
             SDL.SDL_Event e;
             while (SDL.SDL_PollEvent(out e) != 0)

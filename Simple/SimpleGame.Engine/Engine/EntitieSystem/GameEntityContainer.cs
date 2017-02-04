@@ -67,6 +67,11 @@ namespace SimpleGame.Engine.Engine.EntitieSystem
             return _entityArray.First(x => x is T) as T;
         }
 
+        public static T[] GetNetities<T>() where T : GameEntity
+        {
+            return _entityArray.Where(x => x is T).Cast<T>().ToArray();
+        }
+
         public static Queue<RenderableGameEntity> GetRenderableEntities()
         {
             return _renderQueue;
@@ -80,11 +85,11 @@ namespace SimpleGame.Engine.Engine.EntitieSystem
 
         private static void ResizeEntitiesArray()
         {
+            IncreaseNewNumberOfEntities();
             var newEntities = new GameEntity[_newNumberOfEntities];
             Array.Copy(_entityArray, newEntities, _entityArray.Length);
             _entityArray = newEntities;
             GC.Collect();
-            IncreaseNewNumberOfEntities();
             Debug.Log("AntityArray size increased to " + _entityArray.Length);
         }
 

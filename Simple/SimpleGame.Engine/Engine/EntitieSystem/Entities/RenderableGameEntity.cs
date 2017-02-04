@@ -36,6 +36,13 @@ namespace SimpleGame.Engine.Engine.EntitieSystem.Entities
             Position = pos;
         }
 
+        protected void TranslateVertical(float offset)
+        {
+            var pos = Position;
+            pos.Y += offset;
+            Position = pos;
+        }
+
         public abstract void RenderToRenderer(IntPtr renderer);
     }
 }

@@ -55,6 +55,8 @@
     <Compile Include="Controllers\InputController\SceneController.cs" />
     <Compile Include="GameEntities\Character.cs" />
     <Compile Include="GameEntities\SceneSystem\Scene.cs" />
+    <Compile Include="GameEntities\SceneSystem\SceneGameEntity.cs" />
+    <Compile Include="GameEntities\SceneSystem\SceneMainGameEntity.cs" />
     <Compile Include="GameEntities\Staff\Eye.cs" />
     <Compile Include="GameEntities\Text\InputTextEntity.cs" />
     <Compile Include="GameEntityHandlerSystem\GameEntityHandler.cs" />

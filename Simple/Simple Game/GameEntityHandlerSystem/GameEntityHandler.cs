@@ -1,9 +1,11 @@
-﻿using SDL2;
+﻿using System.Security.Cryptography.X509Certificates;
+using SDL2;
 using SimpleGame.Engine.Engine.AnimationSystem;
 using SimpleGame.Engine.Engine.Core;
 using SimpleGame.Engine.Engine.Core.Domain;
 using SimpleGame.Engine.Engine.EntitieSystem.Entities;
 using Simple_Game.GameEntities;
+using Simple_Game.GameEntities.SceneSystem;
 using Simple_Game.GameEntities.Staff;
 using Simple_Game.GameEntities.Text;
 
@@ -31,7 +33,7 @@ namespace Simple_Game.GameEntityHandlerSystem
                 new Sprite[]
                 {
                     eyeSprite0,
-                }, .1f, false);
+                }, .1f, true);
             var open = new Animation("open",
                 new []
                 {
@@ -46,11 +48,7 @@ namespace Simple_Game.GameEntityHandlerSystem
                 {
                     eyeSprite5,
                     eyeSprite6,
-                    eyeSprite5,
-                    eyeSprite6,
-                    eyeSprite5,
-                    eyeSprite6,
-                }, .3f, true);
+                }, .5f, false);
             var close = new Animation("close",
                 new []
                 {
@@ -63,12 +61,75 @@ namespace Simple_Game.GameEntityHandlerSystem
 
             var transitions = new Transition[]
             {
-                new Transition(open, opened), 
-                new Transition(opened, close), 
-                new Transition(closed, closed),
+                new Transition(close, closed), 
+                new Transition(closed, open), 
+                new Transition(open, opened),
             };
             return new Eye(null, 
                 new Animator(new [] { closed, open, opened , close}, transitions));
+        }
+
+        private static Texture _situation0;
+
+        public static SceneGameEntity GetCloud()
+        {
+            var sprite = _situation0.GetSprite(new SDL.SDL_Rect() {x = 0, y = 0, w = 434, h = 192});
+            return new SceneGameEntity(sprite) {Position = new Vector2(0, 170), FlyDistance = 15, Speed = 2};
+        }
+
+        public static SceneGameEntity GetCloud1()
+        {
+            var sprite = _situation0.GetSprite(new SDL.SDL_Rect() {x = 430, y = 0, w = 250, h = 90});
+            return new SceneGameEntity(sprite) {Position = new Vector2(500, 200), FlyDistance = 10, Speed = 5};
+        }
+
+        public static SceneGameEntity GetCloud2()
+        {
+            var sprite = _situation0.GetSprite(new SDL.SDL_Rect() { x = 460, y = 100, w = 210, h = 75 });
+            return new SceneGameEntity(sprite) { Position = new Vector2(200, 0), FlyDistance = 20, Speed = 7};
+        }
+
+        public static SceneGameEntity GetCloud3()
+        {
+            var sprite = _situation0.GetSprite(new SDL.SDL_Rect() { x = 700, y = 0, w = 290, h = 160 });
+            return new SceneGameEntity(sprite) { Position = new Vector2(350, 20) ,FlyDistance = 20, Speed = 2};
+        }
+
+        public static SceneMainGameEntity GetMainSceneGameEntity()
+        {
+            _situation0 = Resources.LoadTexture("Situation 0.png");
+            var sprite0 = _situation0.GetSprite(new SDL.SDL_Rect() {x = 0, y = 190, w = 220, h = 280});
+            var sprite1 = _situation0.GetSprite(new SDL.SDL_Rect() {x = 220, y = 190, w = 220, h = 280});
+            var sprite2 = _situation0.GetSprite(new SDL.SDL_Rect() {x = 440, y = 190, w = 220, h = 280});
+            var sprite3 = _situation0.GetSprite(new SDL.SDL_Rect() {x = 660, y = 190, w = 220, h = 280});
+            var sprite4 = _situation0.GetSprite(new SDL.SDL_Rect() {x = 880, y = 190, w = 220, h = 280});
+            var sprite5 = _situation0.GetSprite(new SDL.SDL_Rect() {x = 1100, y = 190, w = 220, h = 280});
+            var idle = new Animation("idle",
+                new []
+                {
+                    sprite0,
+                    sprite1
+                }, .1f, false);
+            var activate = new Animation("activate",
+                new []
+                {
+                    sprite2,
+                    sprite3,
+                    sprite4,
+                    sprite5,
+                }, .1f, true);
+            return new SceneMainGameEntity(null, new Animator(new Animation[] {idle, activate}, new Transition[] {})) {Position = new Vector2(400, 150), Pivot = new Vector2(.5f, .5f)};
+        }
+
+        public static Scene GetScene0()
+        {
+            var main = GetMainSceneGameEntity();
+            return new Scene("раскрыть парашют", new SpriteGameEntity[] {GetCloud(), GetCloud1(), GetCloud2(), GetCloud3(), main}, main);
+        }
+
+        public static Scene GetSceneStart()
+        {
+            return new Scene("заснуть", new SpriteGameEntity[] {}, null);
         }
 
         //private static GameEntity GetCharacter()

@@ -9,6 +9,7 @@ using SimpleGame.Engine.Engine.EntitieSystem.Entities;
 using SimpleGame.Engine.Engine.SDLEventHandler;
 using Simple_Game.Controllers.InputController;
 using Simple_Game.GameEntities;
+using Simple_Game.GameEntities.SceneSystem;
 using Simple_Game.GameEntities.Staff;
 using Simple_Game.GameEntities.Text;
 using Simple_Game.GameEntityHandlerSystem;
@@ -40,10 +41,23 @@ namespace Simple_Game
 
         private static void InitGameEntities()
         {
+            //Controllers
             GameEntityContainer.RegisterEntity(InputController.Instance);
             GameEntityContainer.RegisterEntity(SceneController.Instance);
+
+            //Scenes
+            RegisterScene(GameEntityHandler.GetSceneStart());
+            RegisterScene(GameEntityHandler.GetScene0());
+
+            //Front
             GameEntityContainer.RegisterEntity(GameEntityHandler.GetEye());
             GameEntityContainer.RegisterEntity(GameEntityHandler.GetInptut());
+        }
+
+        private static void RegisterScene(Scene scene)
+        {
+            GameEntityContainer.RegisterEntity(scene);
+            foreach (var child in scene.Children) GameEntityContainer.RegisterEntity(child);
         }
         
         static void Main(string[] args)

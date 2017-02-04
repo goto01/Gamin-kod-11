@@ -60,6 +60,7 @@
     <Compile Include="Engine\Core\SDLHelpers\MarshalHelper.cs" />
     <Compile Include="Engine\EntitieSystem\CoreEntities\SimpleTextGameEntity.cs" />
     <Compile Include="Engine\EntitieSystem\Entities\AnimatedGameEntity.cs" />
+    <Compile Include="Engine\EntitieSystem\Entities\EntitiesContainerEntity.cs" />
     <Compile Include="Engine\EntitieSystem\Entities\GameEntity.cs" />
     <Compile Include="Engine\EntitieSystem\Entities\RenderableGameEntity.cs" />
     <Compile Include="Engine\EntitieSystem\Entities\SpriteGameEntity.cs" />

@@ -16,7 +16,7 @@ namespace Simple_Game.Controllers.InputController
         
         public override void Start()
         {
-            _scenes = new Scene[] {new Scene("раскрыть парашют"), new Scene("нажать кнопку"), };
+            _scenes = GameEntityContainer.GetNetities<Scene>();
             _currentSceneIndex = 0;
             _eye = GameEntityContainer.GetEntity<Eye>();
         }
@@ -33,7 +33,9 @@ namespace Simple_Game.Controllers.InputController
 
         public void SwitchScene()
         {
+            CurrentScene.HideScene();
             _currentSceneIndex ++;
+            CurrentScene.ShowScene();
             _eye.Blink();
         }
     }

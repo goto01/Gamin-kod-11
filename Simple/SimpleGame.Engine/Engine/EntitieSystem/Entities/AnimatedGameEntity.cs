@@ -14,7 +14,7 @@ namespace SimpleGame.Engine.Engine.EntitieSystem.Entities
         
         public override void Update()
         {
-            _animator.UpdateAnimation(this);
+            _animator?.UpdateAnimation(this);
         }
     }
 }

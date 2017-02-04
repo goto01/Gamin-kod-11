@@ -20,7 +20,7 @@ namespace Simple_Game.GameEntities.Text
         {
             UpdateContent();
             SetFirstCharToUpper();
-            if (InputController.Instance.GetEnterDown()) SceneController.Instance.SwitchScene();
+            if (InputController.Instance.GetEnterDown() && SceneController.Instance.CheckVariat(_text)) SceneController.Instance.SwitchScene();
         }
 
         private void UpdateContent()

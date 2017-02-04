@@ -7,6 +7,11 @@ namespace SimpleGame.Engine.Engine.EntitieSystem.Entities
     {
         protected readonly Animator _animator;
 
+        public Animator Animator
+        {
+            get { return _animator; }
+        }
+
         protected AnimatedGameEntity(Sprite sprite, Animator animator) : base(sprite)
         {
             _animator = animator;

@@ -13,7 +13,8 @@ namespace Simple_Game.GameEntities.Staff
 
         public override void Start()
         {
-            _animator.PlayAnimation("open");
+            _animator.PlayAnimation("closedLong");
+            Call(() => _animator.PlayAnimation("open"), 0);
         }
 
         public void Blink()

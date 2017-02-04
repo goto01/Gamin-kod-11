@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using SDL2;
 using SimpleGame.Engine.Engine.AnimationSystem;
 using SimpleGame.Engine.Engine.Core;
@@ -58,6 +59,11 @@ namespace Simple_Game.GameEntityHandlerSystem
                     eyeSprite1,
                     eyeSprite0,
                 }, .1f, true);
+            var closedLong = new Animation("closedLong",
+                new[]
+                {
+                    eyeSprite0,
+                }, .1f, false);
 
             var transitions = new Transition[]
             {
@@ -66,8 +72,10 @@ namespace Simple_Game.GameEntityHandlerSystem
                 new Transition(open, opened),
             };
             return new Eye(null, 
-                new Animator(new [] { closed, open, opened , close}, transitions));
+                new Animator(new [] { closed, open, opened , close, closedLong }, transitions));
         }
+
+        #region Scene 0
 
         private static Texture _situation0;
 
@@ -127,10 +135,145 @@ namespace Simple_Game.GameEntityHandlerSystem
             return new Scene("раскрыть парашют", new SpriteGameEntity[] {GetCloud(), GetCloud1(), GetCloud2(), GetCloud3(), main}, main);
         }
 
+        #endregion
+
+        #region Scene start
+
+        private static Texture _situationStart;
+
+        public static SceneMainGameEntity GetBed()
+        {
+            _situationStart = Resources.LoadTexture("SituationStart.png");
+            var sprite0 = _situationStart.GetSprite(new SDL.SDL_Rect() {x = 0, y = 60, w = 377, h = 311});
+            var sprite1 = _situationStart.GetSprite(new SDL.SDL_Rect() {x = 385, y = 0, w = 700, h = 450});
+            var idle = new Animation("idle",
+                new []{sprite0}, .1f, false);
+            var activate = new Animation("activate",
+                new Sprite[] {sprite1}, .1f, false);
+            return new SceneMainGameEntity(null, new Animator(new []{idle, activate}, new Transition[] {})) {Position = new Vector2(400, 200), Pivot = new Vector2(.5f, .5f), FlyDistance = 5, Speed = 1};
+        }
+
+        public static SceneGameEntity GetStar0()
+        {
+            var sprite0 = _situationStart.GetSprite(new SDL.SDL_Rect() {x = 0, y = 0, w = 60, h = 50});
+            var sprite1 = _situationStart.GetSprite(new SDL.SDL_Rect() {x = 60, y = 0, w = 60, h = 50});
+            var sprite2 = _situationStart.GetSprite(new SDL.SDL_Rect() {x = 120, y = 0, w = 60, h = 50});
+            var sprite3 = _situationStart.GetSprite(new SDL.SDL_Rect() {x = 180, y = 0, w = 60, h = 50});
+            var idle = new Animation("idle", new Sprite[]
+            {
+                sprite0,
+                sprite1,
+                sprite2,
+                sprite3
+            }, .1f, false);
+            return new SceneGameEntity(sprite0, new Animator(new Animation[] {idle}, new Transition[] {}));
+        }
+
+        public static SceneGameEntity GetMoon()
+        {
+            var sprite0 = _situationStart.GetSprite(new SDL.SDL_Rect() {x = 0, y = 370, w = 100, h = 113});
+            var sprite1 = _situationStart.GetSprite(new SDL.SDL_Rect() {x = 100, y = 370, w = 100, h = 113});
+            var sprite2 = _situationStart.GetSprite(new SDL.SDL_Rect() {x = 200, y = 370, w = 100, h = 113});
+            var sprite3 = _situationStart.GetSprite(new SDL.SDL_Rect() {x = 300, y = 370, w = 100, h = 113});
+            var idle = new Animation("idle", new Sprite[] {sprite0, sprite1,sprite2, sprite3}, .1f, false);
+            return new SceneGameEntity(sprite0, new Animator(new Animation[] {idle}, new Transition[] {})) {Position = new Vector2(400, 50)};
+        }
+
         public static Scene GetSceneStart()
         {
-            return new Scene("заснуть", new SpriteGameEntity[] {}, null);
+            var bed = GetBed();
+            var star0 = GetStar0();
+            star0.Position = new Vector2(200, 50);
+            star0.FlyDistance = 10;
+            star0.Animator.PlayAnimation("idle");
+
+            var star1 = GetStar0();
+            star1.Position = new Vector2(300, 200);
+            star1.FlyDistance = 5;
+            star1.Animator.PlayAnimation("idle");
+
+            var star2 = GetStar0();
+            star2.Position = new Vector2(550, 150);
+            star2.FlyDistance = 3;
+            star2.Animator.PlayAnimation("idle");
+
+            var star3 = GetStar0();
+            star3.Position = new Vector2(480, 180);
+            star3.FlyDistance = 15;
+            star3.Animator.PlayAnimation("idle");
+
+            var star4 = GetStar0();
+            star4.Position = new Vector2(150, 280);
+            star4.FlyDistance = 15;
+            star4.Animator.PlayAnimation("idle");
+
+            var star5 = GetStar0();
+            star5.Position = new Vector2(390, 2400);
+            star5.FlyDistance = 15;
+            star5.Animator.PlayAnimation("idle");
+            return new Scene("заснуть", new SpriteGameEntity[] {bed, star0, star1, star2, star3, star4, star5, GetMoon()}, bed);
         }
+
+        #endregion
+
+        #region Intro region
+
+        private static Texture _introTexture;
+
+        public static SceneMainGameEntity GetSwitcher()
+        {
+            _introTexture = Resources.LoadTexture("Situation intro.png");
+            var sprite0 = _introTexture.GetSprite(new SDL.SDL_Rect() {x = 275, y = 0, w = 158, h = 290});
+            var sprite1 = _introTexture.GetSprite(new SDL.SDL_Rect() {x = 450, y = 0, w = 158, h = 290});
+            var sprite2 = _introTexture.GetSprite(new SDL.SDL_Rect() { x = 275, y = 270, w = 158, h = 290 });
+            var sprite3 = _introTexture.GetSprite(new SDL.SDL_Rect() { x = 450, y = 270, w = 158, h = 290 });
+            var idle = new Animation("idle", new Sprite[] {sprite0, sprite1}, .1f, false);
+            var activate = new Animation("activate", new Sprite[] {sprite2, sprite3}, .1f, false);
+            return new SceneMainGameEntity(sprite0, new Animator(new Animation[] {idle, activate }, new Transition[] {})) {Position = new Vector2(400, 270), Pivot = new Vector2(.5f, .5f)};
+        }
+
+        public static SceneGameEntity GetDot0()
+        {
+            var sprite0 = _introTexture.GetSprite(new SDL.SDL_Rect() {x = 0, y = 0, w = 125, h = 120});
+            var sprite1 = _introTexture.GetSprite(new SDL.SDL_Rect() {x = 125, y = 0, w = 125, h = 120});
+            var idle = new Animation("idle", new Sprite[] {sprite0, sprite1}, .23f, false);
+            return new SceneGameEntity(null, new Animator(new Animation[] {idle}, new Transition[] {})) {Position = new Vector2(180, 230), FlyDistance = 5};
+        }
+
+        public static SceneGameEntity GetDot1()
+        {
+            var sprite0 = _introTexture.GetSprite(new SDL.SDL_Rect() { x = 0, y = 120, w = 125, h = 140 });
+            var sprite1 = _introTexture.GetSprite(new SDL.SDL_Rect() { x = 125, y = 120, w = 125, h = 140 });
+            var idle = new Animation("idle", new Sprite[] { sprite0, sprite1 }, .23f, false);
+            return new SceneGameEntity(null, new Animator(new Animation[] { idle }, new Transition[] { })) { Position = new Vector2(500, 230), FlyDistance = 5 };
+        }
+
+        public static SceneGameEntity GetTitle()
+        {
+            var texture = Resources.LoadTexture("titleword 280x100.png");
+            var sprite0 = texture.GetSprite(new SDL.SDL_Rect() {x = 0, y = 0, w = 280, h = 100});
+            var sprite1 = texture.GetSprite(new SDL.SDL_Rect() {x = 280, y = 0, w = 280, h = 100});
+            var sprite2 = texture.GetSprite(new SDL.SDL_Rect() {x = 560, y = 0, w = 280, h = 100});
+            var sprite3 = texture.GetSprite(new SDL.SDL_Rect() {x = 840, y = 0, w = 280, h = 100});
+            var sprite4 = texture.GetSprite(new SDL.SDL_Rect() {x = 1120, y = 0, w = 280, h = 100});
+            var idle = new Animation("idle", new Sprite[]
+            {
+                sprite0,
+                sprite1,
+                sprite2,
+                sprite3,
+                sprite4
+            }, .1f, false);
+            return new SceneGameEntity(null, new Animator(new Animation[] {idle}, new Transition[] {})) {Position = new Vector2(400, 100), Pivot = new Vector2(.5f, .5f), FlyDistance = 15, Speed = 3};
+        }
+
+        public static Scene GetSceneIntro()
+        {
+            var switcher = GetSwitcher();
+            return new Scene("Выключить", new []{switcher, GetDot0(), GetDot1(), GetTitle() }, switcher);
+        }
+
+        #endregion
 
         public static Scene GetScene1()
         {

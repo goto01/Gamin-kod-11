@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Configuration;
 using SimpleGame.Engine.Engine.Coroutines;
@@ -46,6 +47,17 @@ namespace SimpleGame.Engine.Engine.EntitieSystem.Entities
                 var current = _coroutines[index].Current as IWaitFor;
                 if (current == null || current.TimeFor()) _coroutines[index].MoveNext();
             }
+        }
+
+        protected void Call(Action action, float delay)
+        {
+            StartCoroutine(Invoke(action, delay));
+        }
+
+        protected IEnumerator Invoke(Action action, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            action.Invoke();
         }
     }
 }

@@ -30,9 +30,12 @@ namespace Simple_Game.GameEntities.Text
         private void UpdateEnter()
         {
             if (!SceneController.Instance.TryToSwitchScene(_text))
+            {
                 StartCoroutine(Shake());
-            else 
-                StartCoroutine(Reset());
+                Call(()=>StartCoroutine(Reset()), .3f);
+            }
+            else
+                Call(()=>StartCoroutine(Reset()), 1);
         }
 
         private void UpdateContent()
@@ -53,7 +56,6 @@ namespace Simple_Game.GameEntities.Text
 
         private IEnumerator Reset()
         {
-            yield return new WaitForSeconds(1);
             while (!string.IsNullOrEmpty(_text))
             {
                 _text = _text.Substring(0, _text.Length - 1);

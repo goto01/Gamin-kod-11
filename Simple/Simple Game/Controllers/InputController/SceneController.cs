@@ -21,6 +21,7 @@ namespace Simple_Game.Controllers.InputController
             _scenes = GameEntityContainer.GetNetities<Scene>();
             _currentSceneIndex = 0;
             _eye = GameEntityContainer.GetEntity<Eye>();
+            CurrentScene.ShowScene();
         }
 
         public override void Update()

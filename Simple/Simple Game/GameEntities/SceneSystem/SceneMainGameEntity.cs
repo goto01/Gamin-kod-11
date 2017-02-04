@@ -13,6 +13,7 @@ namespace Simple_Game.GameEntities.SceneSystem
 
         public override void Start()
         {
+            base.Start();
             _animator.PlayAnimation("idle");
         }
 

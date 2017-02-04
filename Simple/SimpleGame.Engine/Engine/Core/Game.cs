@@ -78,17 +78,12 @@ namespace SimpleGame.Engine.Engine.Core
 
         private static bool InitSDL()
         {
-            return SDL.SDL_Init(SDL.SDL_INIT_VIDEO) == 0;
+            return SDL.SDL_Init(SDL.SDL_INIT_VIDEO | SDL.SDL_INIT_AUDIO) == 0;
         }
 
         private static IntPtr CreateWindow()
         {
             return SDL.SDL_CreateWindow(WindowTitle, SDL.SDL_WINDOWPOS_UNDEFINED, SDL.SDL_WINDOWPOS_UNDEFINED, ScreenWidth, ScreenHeight, SDL.SDL_WindowFlags.SDL_WINDOW_SHOWN);
-        }
-
-        private static IntPtr GetScreenSurface()
-        {
-            return SDL.SDL_GetWindowSurface(_window);
         }
     }
 }

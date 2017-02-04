@@ -36,6 +36,13 @@ namespace SimpleGame.Engine.Engine.Core
                 Debug.LogSDLError("Can't init ttf");
                 Game.QuitFlag = true;
             }
+            if (SDL_mixer.Mix_OpenAudio(44100, SDL_mixer.MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+            {
+                Debug.LogSDLError("Can't open sfx ");
+                Game.QuitFlag = true;
+            }
+            var s = SDL_mixer.Mix_LoadWAV("Resources/sfx/ost.wav");
+            SDL_mixer.Mix_PlayChannel(-1, s, 0);
 
             _importedTextures = new List<IntPtr>();
             _importedFonts = new List<IntPtr>();

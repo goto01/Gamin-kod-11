@@ -370,6 +370,8 @@ namespace Simple_Game.GameEntityHandlerSystem
                 "использовать пистолет",
                 "нанести выстрел",
                 "убить",
+                "пистолет",
+                "достать"
             }, new SpriteGameEntity[] {cowboy, circle0, circle1, circle2}, cowboy);
         }
 

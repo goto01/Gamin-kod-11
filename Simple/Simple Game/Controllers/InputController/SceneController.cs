@@ -31,7 +31,7 @@ namespace Simple_Game.Controllers.InputController
 
         public bool TryToSwitchScene(string variant)
         {
-            if (variant.Equals(CurrentScene.TextVariant, StringComparison.InvariantCultureIgnoreCase))
+            if (CurrentScene.CompareVariatn(variant))
                 StartCoroutine(SwitchScene());
             else return false;
             return true;

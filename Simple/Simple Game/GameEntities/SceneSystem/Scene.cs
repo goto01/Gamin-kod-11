@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Linq;
 using SimpleGame.Engine.Engine.Coroutines;
 using SimpleGame.Engine.Engine.EntitieSystem.Entities;
 
@@ -7,12 +9,17 @@ namespace Simple_Game.GameEntities.SceneSystem
     class Scene : EntitiesContainerEntity
     {
         public SceneMainGameEntity MainGameEntity { get; private set; }
-        public string TextVariant { get; private set; }
+        public string[] TextVariants { get; private set; }
 
-        public Scene(string variant, SpriteGameEntity[] children, SceneMainGameEntity mainGameEntity) : base(children)
+        public Scene(string[] variants, SpriteGameEntity[] children, SceneMainGameEntity mainGameEntity) : base(children)
         {
-            TextVariant = variant;
+            TextVariants = variants;
             MainGameEntity = mainGameEntity;
+        }
+
+        public bool CompareVariatn(string variant)
+        {
+            return TextVariants.Any(x => x.Equals(variant, StringComparison.InvariantCultureIgnoreCase));
         }
 
         public void ShowScene()

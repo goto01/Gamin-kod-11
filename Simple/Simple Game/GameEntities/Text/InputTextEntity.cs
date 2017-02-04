@@ -32,10 +32,12 @@ namespace Simple_Game.GameEntities.Text
             if (!SceneController.Instance.TryToSwitchScene(_text))
             {
                 StartCoroutine(Shake());
-                Call(()=>StartCoroutine(Reset()), .3f);
+                Call(() => StartCoroutine(Reset()), .3f);
             }
             else
-                Call(()=>StartCoroutine(Reset()), 1);
+            {
+                StartCoroutine(Move());
+            }
         }
 
         private void UpdateContent()
@@ -59,7 +61,7 @@ namespace Simple_Game.GameEntities.Text
             while (!string.IsNullOrEmpty(_text))
             {
                 _text = _text.Substring(0, _text.Length - 1);
-                yield return null;
+                yield return new WaitForSeconds(.01f);
             }
         }
 
@@ -71,6 +73,23 @@ namespace Simple_Game.GameEntities.Text
             while (time++ < 20)
             {
                 Position = origin + new Vector2((float) random.Next(-10, 10), (float) random.Next(-10, 10));
+                yield return new WaitForSeconds(.01f);
+            }
+            Position = origin;
+        }
+
+        private IEnumerator Move()
+        {
+            var origin = Position;
+            while (Math.Abs(Position.Y - origin.Y) < 20)
+            {
+                TranslateVertical(-2);
+                yield return null;
+            }
+            yield return new WaitForSeconds(1);
+            while (!string.IsNullOrEmpty(_text))
+            {
+                _text = _text.Substring(0, _text.Length - 1);
                 yield return new WaitForSeconds(.01f);
             }
             Position = origin;

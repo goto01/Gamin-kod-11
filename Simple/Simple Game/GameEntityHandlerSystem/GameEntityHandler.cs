@@ -133,7 +133,14 @@ namespace Simple_Game.GameEntityHandlerSystem
         public static Scene GetScene0()
         {
             var main = GetMainSceneGameEntity();
-            return new Scene("раскрыть парашют", new SpriteGameEntity[] {GetCloud(), GetCloud1(), GetCloud2(), GetCloud3(), main}, main);
+            return new Scene(new []
+            {
+                "раскрыть парашют",
+                "использовать парашют",
+                "вытянуть кольцо",
+                "дёрнуть кольцо",
+                "парашют"
+            }, new SpriteGameEntity[] {GetCloud(), GetCloud1(), GetCloud2(), GetCloud3(), main}, main);
         }
 
         #endregion
@@ -212,7 +219,16 @@ namespace Simple_Game.GameEntityHandlerSystem
             star5.Position = new Vector2(390, 2400);
             star5.FlyDistance = 15;
             star5.Animator.PlayAnimation("idle");
-            return new Scene("заснуть", new SpriteGameEntity[] {bed, star0, star1, star2, star3, star4, star5, GetMoon()}, bed);
+            return new Scene(new string[]
+            {
+                "заснуть",
+                "спать",
+                "лечь",
+                "лечь спать",
+                "поспать",
+                "отдохнуть",
+                "прилечь",
+            }, new SpriteGameEntity[] {bed, star0, star1, star2, star3, star4, star5, GetMoon()}, bed);
         }
 
         #endregion
@@ -271,7 +287,15 @@ namespace Simple_Game.GameEntityHandlerSystem
         public static Scene GetSceneIntro()
         {
             var switcher = GetSwitcher();
-            return new Scene("Выключить", new []{switcher, GetDot0(), GetDot1(), GetTitle() }, switcher);
+            return new Scene(new []
+            {
+                "выключить",
+                "выключить свет",
+                "переключить",
+                "отключить",
+                "отключить свет",
+                "нажать",
+            }, new []{switcher, GetDot0(), GetDot1(), GetTitle() }, switcher);
         }
 
         #endregion
@@ -339,7 +363,14 @@ namespace Simple_Game.GameEntityHandlerSystem
             circle2.Animator.PlayAnimation("idle");
             circle2.FlyDistance = 15;
 
-            return new Scene("выстрелить", new SpriteGameEntity[] {cowboy, circle0, circle1, circle2}, cowboy);
+            return new Scene(new []
+            {
+                "выстрелить",
+                "достать пистолет",
+                "использовать пистолет",
+                "нанести выстрел",
+                "убить",
+            }, new SpriteGameEntity[] {cowboy, circle0, circle1, circle2}, cowboy);
         }
 
         #endregion
@@ -401,7 +432,16 @@ namespace Simple_Game.GameEntityHandlerSystem
             knife2.FlyDistance = 15;
             knife2.Speed = 13;
 
-            return new Scene("копать", new SpriteGameEntity[] {location, knife0, knife1, knife2}, location);
+            return new Scene(new []
+            {
+                "копать",
+                "копать лопатой",
+                "копать подкоп",
+                "сделать подкоп",
+                "подкоп",
+                "взять лопату",
+                "использовать лопату",
+            }, new SpriteGameEntity[] {location, knife0, knife1, knife2}, location);
         }
 
         #endregion

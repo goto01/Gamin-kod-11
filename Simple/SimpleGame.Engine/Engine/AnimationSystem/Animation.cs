@@ -1,6 +1,9 @@
-﻿using SimpleGame.Engine.Engine.Core;
+﻿using System;
+using SDL2;
+using SimpleGame.Engine.Engine.Core;
 using SimpleGame.Engine.Engine.Core.Domain;
 using SimpleGame.Engine.Engine.EntitieSystem.Entities;
+using SimpleGame.Engine.Engine.Helpers;
 using SimpleGame.Engine.Engine.SDLEventHandler;
 
 namespace SimpleGame.Engine.Engine.AnimationSystem
@@ -15,17 +18,20 @@ namespace SimpleGame.Engine.Engine.AnimationSystem
         private float _timer;
         private int _spriteIndex;
         private int _delta;
+        private bool _once;
+
+        public event EventHandler End;
 
         public string Name { get { return _name; } }
-
         private Sprite CurrentSprite { get { return _sprites[_spriteIndex]; } }
 
-        public Animation(string name, Sprite[] sprites, float delay, bool repeat = true)
+        public Animation(string name, Sprite[] sprites, float delay, bool once, bool repeat = true)
         {
             _name = name;
             _sprites = sprites;
             _delay = delay;
             _repeat = repeat;
+            _once = once;
         }
 
         public void Start()
@@ -38,6 +44,7 @@ namespace SimpleGame.Engine.Engine.AnimationSystem
 
         public void Stop()
         {
+            End.Raise(this);
             _active = false;
         }
 
@@ -70,6 +77,11 @@ namespace SimpleGame.Engine.Engine.AnimationSystem
 
         private void SwitchSprite()
         {
+            if (_spriteIndex == _sprites.Length - 1 && _once)
+            {
+                Stop();
+                return;
+            }
             if (_repeat) _spriteIndex = ++_spriteIndex%_sprites.Length;
             else
             {

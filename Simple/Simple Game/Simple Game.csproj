@@ -52,8 +52,12 @@
   <ItemGroup>
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\InputController\InputController.cs" />
+    <Compile Include="Controllers\InputController\SceneController.cs" />
     <Compile Include="GameEntities\Character.cs" />
+    <Compile Include="GameEntities\SceneSystem\Scene.cs" />
+    <Compile Include="GameEntities\Staff\Eye.cs" />
     <Compile Include="GameEntities\Text\InputTextEntity.cs" />
+    <Compile Include="GameEntityHandlerSystem\GameEntityHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

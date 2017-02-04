@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using SimpleGame.Engine.Engine.Core;
 using SimpleGame.Engine.Engine.EntitieSystem.Entities;
 
@@ -59,6 +60,11 @@ namespace SimpleGame.Engine.Engine.EntitieSystem
                     if (_entityArray[index].Renderable) AddToRenderIfRenderable(_entityArray[index] as RenderableGameEntity);
                 }
             }
+        }
+
+        public static T GetEntity<T>() where T : GameEntity
+        {
+            return _entityArray.First(x => x is T) as T;
         }
 
         public static Queue<RenderableGameEntity> GetRenderableEntities()

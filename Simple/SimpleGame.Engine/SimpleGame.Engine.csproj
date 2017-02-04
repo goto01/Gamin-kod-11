@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Engine\AnimationSystem\Animation.cs" />
     <Compile Include="Engine\AnimationSystem\Animator.cs" />
+    <Compile Include="Engine\AnimationSystem\Transition.cs" />
     <Compile Include="Engine\Core\Debug.cs" />
     <Compile Include="Engine\Core\Domain\Sprite.cs" />
     <Compile Include="Engine\Core\Domain\Texture.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Engine\EntitieSystem\Entities\TextGameEntity.cs" />
     <Compile Include="Engine\EntitieSystem\GameEntityContainer.cs" />
     <Compile Include="Engine\EntitieSystem\Entities\SimpleGameEntity.cs" />
+    <Compile Include="Engine\Helpers\EventHelper.cs" />
     <Compile Include="Engine\SDLEventHandler\Time.cs" />
     <Compile Include="Engine\SDLRenderer\Renderer.cs" />
     <Compile Include="Engine\SDLEventHandler\Input.cs" />

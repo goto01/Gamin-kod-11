@@ -55,12 +55,20 @@ namespace Simple_Game.Controllers.InputController
 
         }
 
+        public bool GetBackspaceDown()
+        {
+            return Input.GetKeyDown(SDL.SDL_Keycode.SDLK_BACKSPACE);
+        }
+
+        public bool GetEnterDown()
+        {
+            return Input.GetKeyDown(SDL.SDL_Keycode.SDLK_RETURN);
+        }
+
         public IList<char> GetDownKeys()
         {
             var res = new List<char>();
             var keys = Input.GetDownKeys();
-            if (keys.Any()) 
-                Debug.Log("");
             for (var index = 0; index < keys.Count; index++)
             {
                 char @char;

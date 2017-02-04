@@ -18,10 +18,17 @@ namespace Simple_Game.GameEntities.Text
 
         public override void Update()
         {
+            UpdateContent();
+            SetFirstCharToUpper();
+            if (InputController.Instance.GetEnterDown()) SceneController.Instance.SwitchScene();
+        }
+
+        private void UpdateContent()
+        {
             var keys = InputController.Instance.GetDownKeys();
             for (var index = 0; index < keys.Count; index++) Text += keys[index];
 
-            SetFirstCharToUpper();
+            if (_text.Length != 0 && InputController.Instance.GetBackspaceDown()) _text = _text.Substring(0, _text.Length - 1);
         }
 
         private void SetFirstCharToUpper()

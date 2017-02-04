@@ -31,6 +31,11 @@ namespace SimpleGame.Engine.Engine.Core
                 Debug.LogSDLError("Can't init image init");
                 Game.QuitFlag = true;
             }
+            if (SDL_ttf.TTF_Init() == -1)
+            {
+                Debug.LogSDLError("Can't init ttf");
+                Game.QuitFlag = true;
+            }
 
             _importedTextures = new List<IntPtr>();
             _importedFonts = new List<IntPtr>();

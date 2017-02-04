@@ -1,4 +1,6 @@
-﻿using SDL2;
+﻿using System;
+using System.Runtime.ConstrainedExecution;
+using SDL2;
 using SimpleGame.Engine.Engine.AnimationSystem;
 using SimpleGame.Engine.Engine.Core;
 using SimpleGame.Engine.Engine.Core.Domain;
@@ -40,6 +42,7 @@ namespace Simple_Game
 
             GameEntityContainer.RegisterEntity(InputController.Instance);
             GameEntityContainer.RegisterEntity(GetCharacter());
+            GameEntityContainer.RegisterEntity(GetTitle());
         }
 
         private static GameEntity GetCharacter()
@@ -75,6 +78,12 @@ namespace Simple_Game
             return new Character(birdSprite0, new Animator(new Animation[] {animation, animationRun}));
         }
 
+        private static TextGameEntity GetTitle()
+        {
+            var font = Resources.LoadFont("Pecita.ttf");
+            return new TextGameEntity(font, new SDL.SDL_Color() {r = 255, g = 255, b = 255, a = 255}, "Hello, World!") {Pivot = new Vector2(.5f, 0), Position = new Vector2(400, 550)};
+        }
+
         static void Main(string[] args)
         {
             InitGame();
@@ -90,6 +99,7 @@ namespace Simple_Game
             }
 
             Game.Close();
+            //Console.ReadKey();
         }
     }
 }

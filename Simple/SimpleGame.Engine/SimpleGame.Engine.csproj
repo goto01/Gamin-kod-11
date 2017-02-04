@@ -57,10 +57,12 @@
     <Compile Include="Engine\Core\GameEntitySingleton.cs" />
     <Compile Include="Engine\Core\Resources.cs" />
     <Compile Include="Engine\Core\SDLHelpers\MarshalHelper.cs" />
+    <Compile Include="Engine\EntitieSystem\CoreEntities\SimpleTextGameEntity.cs" />
     <Compile Include="Engine\EntitieSystem\Entities\AnimatedGameEntity.cs" />
     <Compile Include="Engine\EntitieSystem\Entities\GameEntity.cs" />
     <Compile Include="Engine\EntitieSystem\Entities\RenderableGameEntity.cs" />
     <Compile Include="Engine\EntitieSystem\Entities\SpriteGameEntity.cs" />
+    <Compile Include="Engine\EntitieSystem\Entities\TextGameEntity.cs" />
     <Compile Include="Engine\EntitieSystem\GameEntityContainer.cs" />
     <Compile Include="Engine\EntitieSystem\Entities\SimpleGameEntity.cs" />
     <Compile Include="Engine\SDLEventHandler\Time.cs" />

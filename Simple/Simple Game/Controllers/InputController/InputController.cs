@@ -13,7 +13,7 @@ namespace Simple_Game.Controllers.InputController
 
         public override void Update()
         {
-            //Debug.Log(Input.GetKey(SDL.SDL_Keycode.SDLK_UP).ToString());
+
         }
     }
 }

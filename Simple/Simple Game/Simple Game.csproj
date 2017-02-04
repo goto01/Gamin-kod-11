@@ -53,6 +53,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\InputController\InputController.cs" />
     <Compile Include="GameEntities\Character.cs" />
+    <Compile Include="GameEntities\Text\InputTextEntity.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

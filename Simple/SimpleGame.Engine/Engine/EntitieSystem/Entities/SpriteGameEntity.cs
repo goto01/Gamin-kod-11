@@ -8,11 +8,18 @@ namespace SimpleGame.Engine.Engine.EntitieSystem.Entities
     {
         protected Sprite _sprite;
         protected SDL.SDL_Color _modulationColor;
+        protected Vector2 _pivot;
 
         public Sprite Sprite
         {
             get { return _sprite; }
             set { _sprite = value; }
+        }
+
+        public Vector2 Pivot
+        {
+            get { return _pivot; }
+            set { _pivot = value; }
         }
 
         public SpriteGameEntity(Sprite sprite)
@@ -35,8 +42,8 @@ namespace SimpleGame.Engine.Engine.EntitieSystem.Entities
         private void SetPosition()
         {
             var rect = _sprite.DestinationRect;
-            rect.x = (int)Position.X;
-            rect.y = (int)Position.Y;
+            rect.x = (int)Position.X - (int)(_pivot.X * _sprite.DestinationRect.w);
+            rect.y = (int)Position.Y - (int)(_pivot.Y * _sprite.DestinationRect.h);
             _sprite.DestinationRect = rect;
         }
     }

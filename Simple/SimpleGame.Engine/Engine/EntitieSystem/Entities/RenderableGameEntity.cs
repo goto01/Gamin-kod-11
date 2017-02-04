@@ -11,7 +11,7 @@ namespace SimpleGame.Engine.Engine.EntitieSystem.Entities
         private Vector2 _position;
 
         public override bool Renderable { get { return true; } }
-
+        
         public SDL.SDL_RendererFlip Flip
         {
             get

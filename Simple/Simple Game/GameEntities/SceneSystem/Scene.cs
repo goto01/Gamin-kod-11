@@ -1,4 +1,6 @@
-﻿using SimpleGame.Engine.Engine.EntitieSystem.Entities;
+﻿using System.Collections;
+using SimpleGame.Engine.Engine.Coroutines;
+using SimpleGame.Engine.Engine.EntitieSystem.Entities;
 
 namespace Simple_Game.GameEntities.SceneSystem
 {
@@ -15,12 +17,12 @@ namespace Simple_Game.GameEntities.SceneSystem
 
         public void ShowScene()
         {
-            Enable = true;
+            StartCoroutine(ChangeEnable(true));
         }
 
         public void HideScene()
         {
-            Enable = false;
+            StartCoroutine(ChangeEnable(false));
         }
 
         public override void Start()
@@ -32,6 +34,12 @@ namespace Simple_Game.GameEntities.SceneSystem
         public override void Update()
         {
             base.Update();
+        }
+
+        private IEnumerator ChangeEnable(bool enable)
+        {
+            yield return new WaitForSeconds(.5f);
+            Enable = enable;
         }
     }
 }

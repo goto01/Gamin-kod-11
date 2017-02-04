@@ -3,6 +3,7 @@ using System.Collections;
 using SDL2;
 using SimpleGame.Engine.Engine.Core;
 using SimpleGame.Engine.Engine.Core.Domain;
+using SimpleGame.Engine.Engine.Coroutines;
 using SimpleGame.Engine.Engine.EntitieSystem.Entities;
 using Simple_Game.Controllers.InputController;
 
@@ -67,8 +68,9 @@ namespace Simple_Game.GameEntities.Text
             while (time++ < 20)
             {
                 Position = origin + new Vector2((float) random.Next(-10, 10), (float) random.Next(-10, 10));
-                yield return null;
+                yield return new WaitForSeconds(.01f);
             }
+            Position = origin;
         }
     }
 }

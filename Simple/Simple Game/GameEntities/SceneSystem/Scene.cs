@@ -20,6 +20,11 @@ namespace Simple_Game.GameEntities.SceneSystem
             StartCoroutine(ChangeEnable(true));
         }
 
+        public void ActivateScene()
+        {
+            MainGameEntity?.Activate();
+        }
+
         public void HideScene()
         {
             StartCoroutine(ChangeEnable(false));

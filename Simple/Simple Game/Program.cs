@@ -48,6 +48,7 @@ namespace Simple_Game
             //Scenes
             RegisterScene(GameEntityHandler.GetSceneStart());
             RegisterScene(GameEntityHandler.GetScene0());
+            RegisterScene(GameEntityHandler.GetScene1());
 
             //Front
             GameEntityContainer.RegisterEntity(GameEntityHandler.GetEye());

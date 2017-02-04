@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using SimpleGame.Engine.Engine.Coroutines;
 using SimpleGame.Engine.Engine.EntitieSystem;
 using Simple_Game.GameEntities.SceneSystem;
 using Simple_Game.GameEntities.Staff;
@@ -29,13 +31,15 @@ namespace Simple_Game.Controllers.InputController
         public bool TryToSwitchScene(string variant)
         {
             if (variant.Equals(CurrentScene.TextVariant, StringComparison.InvariantCultureIgnoreCase))
-                SwitchScene();
+                StartCoroutine(SwitchScene());
             else return false;
             return true;
         }
 
-        public void SwitchScene()
+        public IEnumerator SwitchScene()
         {
+            CurrentScene.ActivateScene();
+            yield return new WaitForSeconds(1);
             CurrentScene.HideScene();
             _currentSceneIndex ++;
             CurrentScene.ShowScene();

@@ -2,6 +2,19 @@
 {
     public abstract class EntitiesContainerEntity : SimpleGameEntity
     {
+        public override bool Enable
+        {
+            get
+            {
+                return base.Enable;
+            }
+            set
+            {
+                base.Enable = value;
+                if (_children != null) UpdateChildrenEnable();
+            }
+        }
+
         private GameEntity[] _children;
 
         public GameEntity[] Children

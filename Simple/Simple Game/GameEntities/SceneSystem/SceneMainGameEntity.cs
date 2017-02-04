@@ -20,5 +20,10 @@ namespace Simple_Game.GameEntities.SceneSystem
         {
             base.Update();
         }
+
+        public void Activate()
+        {
+            _animator.PlayAnimation("activate");
+        }
     }
 }

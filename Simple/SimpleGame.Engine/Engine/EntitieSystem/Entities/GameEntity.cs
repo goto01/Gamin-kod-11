@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net.Configuration;
 using SimpleGame.Engine.Engine.Coroutines;
 
 namespace SimpleGame.Engine.Engine.EntitieSystem.Entities
@@ -7,10 +8,21 @@ namespace SimpleGame.Engine.Engine.EntitieSystem.Entities
     public abstract class GameEntity
     {
         private List<IEnumerator> _coroutines;
+        private bool _enable;
 
         public abstract bool Renderable{ get; }
 
-        public bool Enable { get; set; }
+        public virtual bool Enable
+        {
+            get
+            {
+                return _enable;
+            }
+            set
+            {
+                _enable = value;
+            }
+        }
 
         public GameEntity()
         {

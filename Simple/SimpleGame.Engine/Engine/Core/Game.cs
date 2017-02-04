@@ -43,9 +43,7 @@ namespace SimpleGame.Engine.Engine.Core
         
         public static void LoadMedia()
         {
-
             GC.Collect();
-            Debug.Log("hello image loaded");
         }
 
         public static void Start()

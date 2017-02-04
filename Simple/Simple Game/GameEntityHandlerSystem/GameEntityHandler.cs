@@ -132,6 +132,11 @@ namespace Simple_Game.GameEntityHandlerSystem
             return new Scene("заснуть", new SpriteGameEntity[] {}, null);
         }
 
+        public static Scene GetScene1()
+        {
+            return new Scene("выстрелить", new SpriteGameEntity[] { }, null);
+        }
+
         //private static GameEntity GetCharacter()
         //{
         //    var birdTexture = Resources.LoadTexture("bird.png");

@@ -53,6 +53,7 @@ namespace Simple_Game.GameEntities.Text
 
         private IEnumerator Reset()
         {
+            yield return new WaitForSeconds(1);
             while (!string.IsNullOrEmpty(_text))
             {
                 _text = _text.Substring(0, _text.Length - 1);

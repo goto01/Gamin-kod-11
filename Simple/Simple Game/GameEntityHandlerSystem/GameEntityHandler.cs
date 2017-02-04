@@ -301,10 +301,44 @@ namespace Simple_Game.GameEntityHandlerSystem
             return new SceneMainGameEntity(null, new Animator(new Animation[] {idle, activate}, new Transition[] {})) {Position = new Vector2(400, 210), Pivot = new Vector2(.5f, .5f), Speed = 0};
         }
 
+        public static SceneGameEntity GetCircle()
+        {
+            var sprite0 = _cowboyTexture.GetSprite(new SDL.SDL_Rect() {x = 0, y = 460, w = 100, h = 130});
+            var sprite1 = _cowboyTexture.GetSprite(new SDL.SDL_Rect() {x = 100, y = 460, w = 100, h = 130});
+            var sprite2 = _cowboyTexture.GetSprite(new SDL.SDL_Rect() {x = 200, y = 460, w = 100, h = 130});
+            var sprite3 = _cowboyTexture.GetSprite(new SDL.SDL_Rect() {x = 300, y = 460, w = 100, h = 130});
+            var idle = new Animation("idle", new Sprite[]
+            {
+                sprite0,
+                sprite1,
+                sprite2,
+                sprite3
+            }, .1f, false);
+            return new SceneGameEntity(null, new Animator(new Animation[] {idle}, new Transition[] {}));
+        }
+
         public static Scene GetScene1()
         {
             var cowboy = GetCowboy();
-            return new Scene("выстрелить", new SpriteGameEntity[] {cowboy}, cowboy);
+            var circle0 = GetCircle();
+            circle0.Position = new Vector2(200, 300);
+            circle0.Pivot = new Vector2(.5f, .5f);
+            circle0.Animator.PlayAnimation("idle");
+            circle0.FlyDistance = 10;
+
+            var circle1 = GetCircle();
+            circle1.Position = new Vector2(400, 400);
+            circle1.Pivot = new Vector2(.5f, .5f);
+            circle1.Animator.PlayAnimation("idle");
+            circle1.FlyDistance = 5;
+
+            var circle2 = GetCircle();
+            circle2.Position = new Vector2(600, 310);
+            circle2.Pivot = new Vector2(.5f, .5f);
+            circle2.Animator.PlayAnimation("idle");
+            circle2.FlyDistance = 15;
+
+            return new Scene("выстрелить", new SpriteGameEntity[] {cowboy, circle0, circle1, circle2}, cowboy);
         }
 
         #endregion

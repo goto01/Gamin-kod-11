@@ -40,7 +40,7 @@ namespace Simple_Game.Controllers.InputController
         public IEnumerator SwitchScene()
         {
             CurrentScene.ActivateScene();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2);
             CurrentScene.HideScene();
             _currentSceneIndex ++;
             CurrentScene.ShowScene();

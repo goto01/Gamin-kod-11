@@ -125,7 +125,7 @@ namespace Simple_Game.GameEntityHandlerSystem
                     sprite3,
                     sprite4,
                     sprite5,
-                }, .1f, true);
+                }, .5f, true);
             return new SceneMainGameEntity(null, new Animator(new Animation[] {idle, activate}, new Transition[] {})) {Position = new Vector2(400, 150), Pivot = new Vector2(.5f, .5f)};
         }
 
@@ -275,10 +275,39 @@ namespace Simple_Game.GameEntityHandlerSystem
 
         #endregion
 
+        #region Scene 1
+
+        private static Texture _cowboyTexture;
+
+        public static SceneMainGameEntity GetCowboy()
+        {
+            _cowboyTexture = Resources.LoadTexture("Situation 1.png");
+            var sprite0 = _cowboyTexture.GetSprite(new SDL.SDL_Rect() {x = 0, y = 0, w = 600, h = 420});
+            var sprite1 = _cowboyTexture.GetSprite(new SDL.SDL_Rect() {x = 600, y = 0, w = 600, h = 420});
+            var sprite2 = _cowboyTexture.GetSprite(new SDL.SDL_Rect() {x = 1200, y = 0, w = 600, h = 420});
+            var sprite3 = _cowboyTexture.GetSprite(new SDL.SDL_Rect() {x = 1800, y = 0, w = 600, h = 420});
+            var sprite4 = _cowboyTexture.GetSprite(new SDL.SDL_Rect() {x = 2400, y = 0, w = 600, h = 420});
+            var idle = new Animation("idle", new Sprite[]
+            {
+                sprite0,
+                sprite1
+            }, 1f, false);
+            var activate = new Animation("activate", new Sprite[]
+            {
+                sprite2,
+                sprite3,
+                sprite4
+            }, 1f, true);
+            return new SceneMainGameEntity(null, new Animator(new Animation[] {idle, activate}, new Transition[] {})) {Position = new Vector2(400, 210), Pivot = new Vector2(.5f, .5f), Speed = 0};
+        }
+
         public static Scene GetScene1()
         {
-            return new Scene("выстрелить", new SpriteGameEntity[] { }, null);
+            var cowboy = GetCowboy();
+            return new Scene("выстрелить", new SpriteGameEntity[] {cowboy}, cowboy);
         }
+
+        #endregion
 
         //private static GameEntity GetCharacter()
         //{

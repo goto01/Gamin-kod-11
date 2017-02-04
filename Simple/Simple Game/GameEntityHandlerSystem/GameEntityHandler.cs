@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Net.Mime;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using SDL2;
 using SimpleGame.Engine.Engine.AnimationSystem;
@@ -339,6 +340,68 @@ namespace Simple_Game.GameEntityHandlerSystem
             circle2.FlyDistance = 15;
 
             return new Scene("выстрелить", new SpriteGameEntity[] {cowboy, circle0, circle1, circle2}, cowboy);
+        }
+
+        #endregion
+
+        #region Scene 2
+
+        private static Texture _prisonTexture;
+
+        public static SceneMainGameEntity GetPrisonLocation()
+        {
+            _prisonTexture = Resources.LoadTexture("Situation 2.png");
+            var sprite0 = _prisonTexture.GetSprite(new SDL.SDL_Rect() {x = 0, y = 0, w = 800, h = 400});
+            var sprite1 = _prisonTexture.GetSprite(new SDL.SDL_Rect() {x = 800, y = 0, w = 800, h = 400});
+            var sprite2 = _prisonTexture.GetSprite(new SDL.SDL_Rect() {x = 1600, y = 0, w = 800, h = 400});
+            var sprite3 = _prisonTexture.GetSprite(new SDL.SDL_Rect() {x = 2400, y = 0, w = 800, h = 400});
+            var idle = new Animation("idle", new Sprite[]
+            {
+                sprite0,
+                sprite1,
+                sprite2,
+            }, 1f, false, false);
+            var activate = new Animation("activate", new Sprite[]
+            {
+                sprite3
+            }, 1f, true);
+            return new SceneMainGameEntity(null, new Animator(new Animation[] {idle, activate}, new Transition[] {})) {Position = new Vector2(400, 200), Pivot = new Vector2(.5f, .5f), FlyDistance = 10, Speed = 3};
+        }
+
+        public static SceneGameEntity GetKnife()
+        {
+            var sprite0 = _prisonTexture.GetSprite(new SDL.SDL_Rect() {x = 0, y = 400, w = 75, h = 70});
+            var sprite1 = _prisonTexture.GetSprite(new SDL.SDL_Rect() {x = 80, y = 400, w = 80, h = 70});
+            var idle = new Animation("idle", new Sprite[]
+            {
+                sprite0,
+                sprite1
+            }, .5f, false);
+            return new SceneGameEntity(null, new Animator(new Animation[] {idle}, new Transition[] {})) {Pivot = new Vector2(.5f, .5f)};
+        }
+
+        public static Scene GetScene2()
+        {
+            var location = GetPrisonLocation();
+            var knife0 = GetKnife();
+            knife0.Animator.PlayAnimation("idle");
+            knife0.Position = new Vector2(200, 300);
+            knife0.FlyDistance = 10;
+            knife0.Speed = 10;
+
+            var knife1 = GetKnife();
+            knife1.Animator.PlayAnimation("idle");
+            knife1.Position = new Vector2(500, 100);
+            knife1.FlyDistance = 8;
+            knife1.Speed = 7;
+
+            var knife2 = GetKnife();
+            knife2.Animator.PlayAnimation("idle");
+            knife2.Position = new Vector2(400, 350);
+            knife2.FlyDistance = 15;
+            knife2.Speed = 13;
+
+            return new Scene("копать", new SpriteGameEntity[] {location, knife0, knife1, knife2}, location);
         }
 
         #endregion

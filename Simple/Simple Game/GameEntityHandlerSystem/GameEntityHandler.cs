@@ -639,6 +639,44 @@ namespace Simple_Game.GameEntityHandlerSystem
 
         #endregion
 
+        #region Scene 7
+
+        public static SceneMainGameEntity GetYoda()
+        {
+            var texture = Resources.LoadTexture("Situation 7.png");
+            var sprite0 = texture.GetSprite(new SDL.SDL_Rect() {x = 0, y = 0, w = 800, h = 600});
+            var sprite1 = texture.GetSprite(new SDL.SDL_Rect() {x = 800, y = 0, w = 800, h = 600});
+            var sprite2 = texture.GetSprite(new SDL.SDL_Rect() {x = 1600, y = 0, w = 800, h = 600});
+            var idle = new Animation("idle",
+                new []
+                {
+                    sprite1,
+                    sprite2
+                }, .1f, false);
+            var activate = new Animation("activate",
+                new []
+                {
+                    sprite0
+                }, 1, true);
+            return new SceneMainGameEntity(null, new Animator(new[] {idle, activate}, new Transition[] {}))
+            {
+                Position = new Vector2(400, 250),
+                Pivot = new Vector2(.5f, .5f),
+            };
+        }
+
+        public static Scene GetScene7()
+        {
+            var main = GetYoda();
+            return new Scene(new []
+            {
+                "сила",
+                "использовать силу",
+            }, new []{main}, main);
+        }
+
+        #endregion
+
         #region Finish scene
 
         public static Scene GetFinishScene()

@@ -47,12 +47,12 @@ namespace Simple_Game
             GameEntityContainer.RegisterEntity(SceneController.Instance);
 
             //Scenes
-            RegisterScene(GameEntityHandler.GetSceneIntro());
-            RegisterScene(GameEntityHandler.GetSceneStart());
-            RegisterScene(GameEntityHandler.GetScene0());
-            RegisterScene(GameEntityHandler.GetScene1());
-            RegisterScene(GameEntityHandler.GetScene2());
-            RegisterScene(GameEntityHandler.GetScene3());
+            //RegisterScene(GameEntityHandler.GetSceneIntro());
+            //RegisterScene(GameEntityHandler.GetSceneStart());
+            //RegisterScene(GameEntityHandler.GetScene0());
+            //RegisterScene(GameEntityHandler.GetScene1());
+            //RegisterScene(GameEntityHandler.GetScene2());
+            RegisterScene(GameEntityHandler.GetScene4());
             RegisterScene(GameEntityHandler.GetFinishScene());
 
             //Front

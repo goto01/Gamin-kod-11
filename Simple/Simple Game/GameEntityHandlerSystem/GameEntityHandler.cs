@@ -1,6 +1,7 @@
 ﻿using System.Net.Mime;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
+using System.Security.Permissions;
 using SDL2;
 using SimpleGame.Engine.Engine.AnimationSystem;
 using SimpleGame.Engine.Engine.Core;
@@ -523,6 +524,43 @@ namespace Simple_Game.GameEntityHandlerSystem
             hola2.FlyDistance = 10;
             hola2.Speed = 6;
             return new Scene(new []{"хола"}, new []{girl, hola, hola1, hola2}, girl);
+        }
+
+        #endregion
+
+        #region Scene 4
+
+        private static Texture _kissTexture;
+
+        public static SceneMainGameEntity GetKiss()
+        {
+            _kissTexture = Resources.LoadTexture("Situation 4.png");
+            var sprite0 = _kissTexture.GetSprite(new SDL.SDL_Rect() {x = 0, y = 0, w = 800, h = 600});
+            var sprite1 = _kissTexture.GetSprite(new SDL.SDL_Rect() {x = 800, y = 0, w = 800, h = 600});
+            var sprite2 = _kissTexture.GetSprite(new SDL.SDL_Rect() {x = 1600, y = 0, w = 800, h = 600});
+            var idle = new Animation("idle",
+                new []
+                {
+                    sprite0,
+                    sprite1,
+                }, .1f, false);
+            var activate = new Animation("activate",
+                new []
+                {
+                    sprite2
+                }, 1, true);
+            return new SceneMainGameEntity(null, new Animator(new []{idle, activate}, new Transition[] {})) {Position = new Vector2(400, 300), Pivot = new Vector2(.5f, .5f)};
+        }
+
+        public static Scene GetScene4()
+        {
+            var kiss = GetKiss();
+            return new Scene(new []
+            {
+                "поцеловать",
+                "поцелуй"
+            }, 
+            new []{kiss}, kiss);
         }
 
         #endregion

@@ -677,6 +677,34 @@ namespace Simple_Game.GameEntityHandlerSystem
 
         #endregion
 
+        #region Scene 8
+        
+        public static SceneMainGameEntity GetSwitcherNew()
+        {
+            _introTexture = Resources.LoadTexture("Situation intro.png");
+            var sprite0 = _introTexture.GetSprite(new SDL.SDL_Rect() { x = 275, y = 0, w = 158, h = 290 });
+            var sprite1 = _introTexture.GetSprite(new SDL.SDL_Rect() { x = 450, y = 0, w = 158, h = 290 });
+            var sprite2 = _introTexture.GetSprite(new SDL.SDL_Rect() { x = 275, y = 270, w = 158, h = 290 });
+            var sprite3 = _introTexture.GetSprite(new SDL.SDL_Rect() { x = 450, y = 270, w = 158, h = 290 });
+            var idle = new Animation("activate", new Sprite[] { sprite0, sprite1 }, .1f, false);
+            var activate = new Animation("idle", new Sprite[] { sprite2, sprite3 }, .1f, false);
+            return new SceneMainGameEntity(sprite0, new Animator(new Animation[] { idle, activate }, new Transition[] { })) { Position = new Vector2(400, 270), Pivot = new Vector2(.5f, .5f) };
+        }
+        
+        public static Scene GetScene8()
+        {
+            var switcher = GetSwitcherNew();
+            return new Scene(new[]
+            {
+                "включить",
+                "включить свет",
+                "переключить",
+                "нажать",
+            }, new[] { switcher, GetDot0(), GetDot1(), GetTitle() }, switcher);
+        }
+
+        #endregion
+
         #region Finish scene
 
         public static Scene GetFinishScene()

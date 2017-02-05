@@ -52,7 +52,9 @@ namespace Simple_Game
             //RegisterScene(GameEntityHandler.GetScene0());
             //RegisterScene(GameEntityHandler.GetScene1());
             //RegisterScene(GameEntityHandler.GetScene2());
-            RegisterScene(GameEntityHandler.GetScene4());
+            //RegisterScene(GameEntityHandler.GetScene3());
+            //RegisterScene(GameEntityHandler.GetScene4());
+            RegisterScene(GameEntityHandler.GetScene5());
             RegisterScene(GameEntityHandler.GetFinishScene());
 
             //Front

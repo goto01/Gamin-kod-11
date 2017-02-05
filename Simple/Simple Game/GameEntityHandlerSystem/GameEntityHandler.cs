@@ -558,9 +558,49 @@ namespace Simple_Game.GameEntityHandlerSystem
             return new Scene(new []
             {
                 "поцеловать",
-                "поцелуй"
+                "поцелуй",
+                "поцеловать в щеку"
             }, 
             new []{kiss}, kiss);
+        }
+
+        #endregion
+
+        #region Scene 5
+
+        private static Texture _hammerTexture;
+
+        public static SceneMainGameEntity GetHammer()
+        {
+            _hammerTexture = Resources.LoadTexture("Situation 5.png");
+            var sprite0 = _hammerTexture.GetSprite(new SDL.SDL_Rect() {x = 0, y = 0, w = 250, h = 300});
+            var sprite1 = _hammerTexture.GetSprite(new SDL.SDL_Rect() {x = 250, y = 0, w = 250, h = 300});
+            var sprite2 = _hammerTexture.GetSprite(new SDL.SDL_Rect() {x = 500, y = 0, w = 250, h = 300});
+            var sprite3 = _hammerTexture.GetSprite(new SDL.SDL_Rect() {x = 750, y = 0, w = 250, h = 300});
+            var idle = new Animation("idle", new []
+            {
+                sprite0,
+                sprite1,
+                sprite2
+            }, .1f, false);
+            var activate = new Animation("activate", new []
+            {
+                sprite3
+            }, 1, true);
+            return new SceneMainGameEntity(null, new Animator(new []{idle, activate}, new Transition[] {})) {Position = new Vector2(400, 250), Pivot = new Vector2(.5f, .5f)};
+        }
+
+        public static Scene GetScene5()
+        {
+            var main = GetHammer();
+            return new Scene(new string[]
+            {
+                "забить",
+                "забить гвоздь",
+                "молоток",
+                "ударить",
+                "ударить молотком",
+            }, new []{main}, main);
         }
 
         #endregion

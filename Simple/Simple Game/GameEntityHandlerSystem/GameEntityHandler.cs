@@ -605,6 +605,40 @@ namespace Simple_Game.GameEntityHandlerSystem
 
         #endregion
 
+        #region Scene 6
+
+        private static SceneMainGameEntity GetMeal()
+        {
+            var texture = Resources.LoadTexture("Situation 6.png");
+            var sprite0 = texture.GetSprite(new SDL.SDL_Rect() {x = 0, y = 0, w = 800, h = 600});
+            var sprite1 = texture.GetSprite(new SDL.SDL_Rect() {x = 800, y = 0, w = 800, h = 600});
+            var idle = new Animation("idle",
+                new []{sprite1}, 1, true);
+            var activate = new Animation("activate", 
+                new []{ sprite0}, 1, true);
+            return new SceneMainGameEntity(null, new Animator(new []{idle, activate}, new Transition[] {}))
+            {
+                Position = new Vector2(400, 300),
+                Pivot = new Vector2(.5f, .5f),
+                Speed = 10,
+            };
+        }
+
+        public static Scene GetScene6()
+        {
+            var main = GetMeal();
+            return new Scene(new []
+            {
+                "поесть",
+                "покушать",
+                "перекусить",
+                "пообедать",
+                "еда",
+            }, new []{main}, main);
+        }
+
+        #endregion
+
         #region Finish scene
 
         public static Scene GetFinishScene()

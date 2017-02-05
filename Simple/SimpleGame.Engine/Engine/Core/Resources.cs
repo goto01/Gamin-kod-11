@@ -41,8 +41,8 @@ namespace SimpleGame.Engine.Engine.Core
                 Debug.LogSDLError("Can't open sfx ");
                 Game.QuitFlag = true;
             }
-            //var s = SDL_mixer.Mix_LoadWAV("Resources/sfx/ost.wav");
-            //SDL_mixer.Mix_PlayChannel(-1, s, 0);
+            var s = SDL_mixer.Mix_LoadWAV("Resources/sfx/ost.wav");
+            SDL_mixer.Mix_PlayChannel(-1, s, 0);
 
             _importedTextures = new List<IntPtr>();
             _importedFonts = new List<IntPtr>();

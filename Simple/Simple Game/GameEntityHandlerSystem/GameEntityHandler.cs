@@ -29,6 +29,26 @@ namespace Simple_Game.GameEntityHandlerSystem
             return new SimpleTextGameEntity(font, new SDL.SDL_Color() {r = 0, g = 0, b = 0, a = 255}, string.Empty);
         }
 
+        public static SimpleTextGameEntity GetCreditsTitle()
+        {
+            var font = Resources.LoadFont("Pecita.ttf");
+            return new SimpleTextGameEntity(font, new SDL.SDL_Color() { r = 0, g = 0, b = 0, a = 255 }, string.Empty)
+            {
+                Position = new Vector2(400, 200),
+                Pivot = new Vector2(.5f, .5f),
+            };
+        }
+
+        public static SimpleTextGameEntity GetCreditsTitleNewLine()
+        {
+            var font = Resources.LoadFont("Pecita.ttf");
+            return new SimpleTextGameEntity(font, new SDL.SDL_Color() { r = 0, g = 0, b = 0, a = 255 }, string.Empty)
+            {
+                Position = new Vector2(400, 240),
+                Pivot = new Vector2(.5f, .5f),
+            };
+        }
+
         public static Eye GetEye()
         {
             var eyeTexture = Resources.LoadTexture("eye.png");
@@ -147,7 +167,12 @@ namespace Simple_Game.GameEntityHandlerSystem
                 "использовать парашют",
                 "вытянуть кольцо",
                 "дёрнуть кольцо",
-                "парашют"
+                "парашют",
+                "раскрыть парашут",
+                "использовать парашут",
+                "вытянуть кольцо",
+                "дёрнуть кольцо",
+                "парашут"
             }, new SpriteGameEntity[] {GetCloud(), GetCloud1(), GetCloud2(), GetCloud3(), main}, main);
         }
 
@@ -634,6 +659,9 @@ namespace Simple_Game.GameEntityHandlerSystem
                 "перекусить",
                 "пообедать",
                 "еда",
+                "есть",
+                "кушать",
+                "съесть",
             }, new []{main}, main);
         }
 

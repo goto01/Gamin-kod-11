@@ -12,6 +12,7 @@ namespace Simple_Game.GameEntities.Text
     class InputTextEntity : TextGameEntity
     {
         private bool _handling;
+        private bool _shaking;
 
         public InputTextEntity(IntPtr font, SDL.SDL_Color solidColor, string text) : base(font, solidColor, text)
         {
@@ -32,7 +33,7 @@ namespace Simple_Game.GameEntities.Text
         private void UpdateEnter()
         {
             if (_handling) return;
-            if (!SceneController.Instance.TryToSwitchScene(_text))
+            if (!_shaking && !SceneController.Instance.TryToSwitchScene(_text))
             {
                 StartCoroutine(Shake());
                 Call(() => StartCoroutine(Reset()), .3f);
@@ -70,6 +71,7 @@ namespace Simple_Game.GameEntities.Text
 
         private IEnumerator Shake()
         {
+            _shaking = true;
             int time = 0;
             Vector2 origin = Position;
             var random = new Random();
@@ -79,6 +81,7 @@ namespace Simple_Game.GameEntities.Text
                 yield return new WaitForSeconds(.01f);
             }
             Position = origin;
+            _shaking = false;
         }
 
         private IEnumerator Move()

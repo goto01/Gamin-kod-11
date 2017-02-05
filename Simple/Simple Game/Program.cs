@@ -47,23 +47,26 @@ namespace Simple_Game
             GameEntityContainer.RegisterEntity(SceneController.Instance);
 
             //Scenes
-            //RegisterScene(GameEntityHandler.GetSceneIntro());
-            //RegisterScene(GameEntityHandler.GetSceneStart());
-            //RegisterScene(GameEntityHandler.GetScene0());
-            //RegisterScene(GameEntityHandler.GetScene1());
-            //RegisterScene(GameEntityHandler.GetScene2());
-            //RegisterScene(GameEntityHandler.GetScene3());
-            //RegisterScene(GameEntityHandler.GetScene4());
-            //RegisterScene(GameEntityHandler.GetScene5());
-            //RegisterScene(GameEntityHandler.GetScene6());
-            //RegisterScene(GameEntityHandler.GetScene7());
+            RegisterScene(GameEntityHandler.GetSceneIntro());
+            RegisterScene(GameEntityHandler.GetSceneStart());
+            RegisterScene(GameEntityHandler.GetScene0());
+            RegisterScene(GameEntityHandler.GetScene1());
+            RegisterScene(GameEntityHandler.GetScene2());
+            RegisterScene(GameEntityHandler.GetScene3());
+            RegisterScene(GameEntityHandler.GetScene4());
+            RegisterScene(GameEntityHandler.GetScene5());
+            RegisterScene(GameEntityHandler.GetScene6());
+            RegisterScene(GameEntityHandler.GetScene7());
             RegisterScene(GameEntityHandler.GetScene8());
-            RegisterScene(GameEntityHandler.GetFinishScene());
+
+            SceneController.Instance.Credits = GameEntityHandler.GetCreditsTitle();
+            SceneController.Instance.CreditsNewLine = GameEntityHandler.GetCreditsTitleNewLine();
+            GameEntityContainer.RegisterEntity(SceneController.Instance.Credits);
+            GameEntityContainer.RegisterEntity(SceneController.Instance.CreditsNewLine);
 
             //Front
             GameEntityContainer.RegisterEntity(GameEntityHandler.GetEye());
             GameEntityContainer.RegisterEntity(GameEntityHandler.GetInptut());
-
         }
 
         private static void RegisterScene(Scene scene)

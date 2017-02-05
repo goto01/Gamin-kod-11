@@ -2,6 +2,7 @@
 using System.Collections;
 using SimpleGame.Engine.Engine.Coroutines;
 using SimpleGame.Engine.Engine.EntitieSystem;
+using SimpleGame.Engine.Engine.EntitieSystem.CoreEntities;
 using Simple_Game.GameEntities.SceneSystem;
 using Simple_Game.GameEntities.Staff;
 using Simple_Game.GameEntityHandlerSystem;
@@ -13,6 +14,9 @@ namespace Simple_Game.Controllers.InputController
         private Scene[] _scenes;
         private int _currentSceneIndex = 0;
         private Eye _eye;
+
+        public SimpleTextGameEntity Credits { get; set; }
+        public SimpleTextGameEntity CreditsNewLine { get; set; }
 
         private Scene CurrentScene { get { return _scenes[_currentSceneIndex]; } }
         
@@ -31,6 +35,7 @@ namespace Simple_Game.Controllers.InputController
 
         public bool TryToSwitchScene(string variant)
         {
+            if (_currentSceneIndex == _scenes.Length) return false;
             if (CurrentScene.CompareVariatn(variant))
                 StartCoroutine(SwitchScene());
             else return false;
@@ -43,7 +48,14 @@ namespace Simple_Game.Controllers.InputController
             yield return new WaitForSeconds(2);
             CurrentScene.HideScene();
             _currentSceneIndex ++;
-            CurrentScene.ShowScene();
+            if (_currentSceneIndex == _scenes.Length)
+                Call(() =>
+                {
+                    Credits.Text = "Доброе утро";
+                    CreditsNewLine.Text = "Спасибо за сны...";
+                }, .5f);
+            else
+                CurrentScene.ShowScene();
             _eye.Blink();
         }
     }

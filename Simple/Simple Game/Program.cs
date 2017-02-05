@@ -5,6 +5,7 @@ using SimpleGame.Engine.Engine.AnimationSystem;
 using SimpleGame.Engine.Engine.Core;
 using SimpleGame.Engine.Engine.Core.Domain;
 using SimpleGame.Engine.Engine.EntitieSystem;
+using SimpleGame.Engine.Engine.EntitieSystem.CoreEntities;
 using SimpleGame.Engine.Engine.EntitieSystem.Entities;
 using SimpleGame.Engine.Engine.SDLEventHandler;
 using Simple_Game.Controllers.InputController;
@@ -45,19 +46,19 @@ namespace Simple_Game
             GameEntityContainer.RegisterEntity(InputController.Instance);
             GameEntityContainer.RegisterEntity(SceneController.Instance);
 
-
             //Scenes
-            //RegisterScene(GameEntityHandler.GetSceneIntro());
-            //RegisterScene(GameEntityHandler.GetSceneStart());
-            //RegisterScene(GameEntityHandler.GetScene0());
-            //RegisterScene(GameEntityHandler.GetScene1());
-            //RegisterScene(GameEntityHandler.GetScene2());
+            RegisterScene(GameEntityHandler.GetSceneIntro());
+            RegisterScene(GameEntityHandler.GetSceneStart());
+            RegisterScene(GameEntityHandler.GetScene0());
+            RegisterScene(GameEntityHandler.GetScene1());
+            RegisterScene(GameEntityHandler.GetScene2());
             RegisterScene(GameEntityHandler.GetScene3());
             RegisterScene(GameEntityHandler.GetFinishScene());
 
             //Front
             GameEntityContainer.RegisterEntity(GameEntityHandler.GetEye());
             GameEntityContainer.RegisterEntity(GameEntityHandler.GetInptut());
+
         }
 
         private static void RegisterScene(Scene scene)

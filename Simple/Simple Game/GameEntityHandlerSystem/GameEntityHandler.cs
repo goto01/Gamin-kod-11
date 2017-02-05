@@ -5,6 +5,7 @@ using SDL2;
 using SimpleGame.Engine.Engine.AnimationSystem;
 using SimpleGame.Engine.Engine.Core;
 using SimpleGame.Engine.Engine.Core.Domain;
+using SimpleGame.Engine.Engine.EntitieSystem.CoreEntities;
 using SimpleGame.Engine.Engine.EntitieSystem.Entities;
 using Simple_Game.GameEntities;
 using Simple_Game.GameEntities.SceneSystem;
@@ -19,6 +20,12 @@ namespace Simple_Game.GameEntityHandlerSystem
         {
             var font = Resources.LoadFont("Pecita.ttf");
             return new InputTextEntity(font, new SDL.SDL_Color() { r = 255, g = 255, b = 255, a = 255 }, "") { Pivot = new Vector2(.5f, .5f), Position = new Vector2(400, 550) };
+        }
+
+        public static SimpleTextGameEntity GetDebugTitle()
+        {
+            var font = Resources.LoadFont("Pecita.ttf");
+            return new SimpleTextGameEntity(font, new SDL.SDL_Color() {r = 0, g = 0, b = 0, a = 255}, string.Empty);
         }
 
         public static Eye GetEye()

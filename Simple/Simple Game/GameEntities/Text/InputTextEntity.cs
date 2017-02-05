@@ -11,6 +11,8 @@ namespace Simple_Game.GameEntities.Text
 {
     class InputTextEntity : TextGameEntity
     {
+        private bool _handling;
+
         public InputTextEntity(IntPtr font, SDL.SDL_Color solidColor, string text) : base(font, solidColor, text)
         {
         }
@@ -29,12 +31,13 @@ namespace Simple_Game.GameEntities.Text
 
         private void UpdateEnter()
         {
+            if (_handling) return;
             if (!SceneController.Instance.TryToSwitchScene(_text))
             {
                 StartCoroutine(Shake());
                 Call(() => StartCoroutine(Reset()), .3f);
             }
-            else
+            else 
             {
                 StartCoroutine(Move());
             }
@@ -80,6 +83,7 @@ namespace Simple_Game.GameEntities.Text
 
         private IEnumerator Move()
         {
+            _handling = true;
             var origin = Position;
             while (Math.Abs(Position.Y - origin.Y) < 20)
             {
@@ -93,6 +97,7 @@ namespace Simple_Game.GameEntities.Text
                 yield return new WaitForSeconds(.01f);
             }
             Position = origin;
+            _handling = false;
         }
     }
 }

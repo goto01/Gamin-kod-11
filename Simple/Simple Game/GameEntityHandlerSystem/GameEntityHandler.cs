@@ -448,6 +448,88 @@ namespace Simple_Game.GameEntityHandlerSystem
 
         #endregion
 
+        #region Scene 3
+
+        private static Texture _holaTexture;
+
+        public static SceneMainGameEntity GetGirl()
+        {
+            _holaTexture = Resources.LoadTexture("Situation 3.png");
+            var sprite0 = _holaTexture.GetSprite(new SDL.SDL_Rect() {x = 0, y = 0, w = 800, h = 350});
+            var sprite1 = _holaTexture.GetSprite(new SDL.SDL_Rect() {x = 800, y = 0, w = 800, h = 350});
+            var sprite2 = _holaTexture.GetSprite(new SDL.SDL_Rect() {x = 1600, y = 0, w = 800, h = 350});
+            var sprite3 = _holaTexture.GetSprite(new SDL.SDL_Rect() {x = 2400, y = 0, w = 800, h = 350});
+            var sprite4 = _holaTexture.GetSprite(new SDL.SDL_Rect() {x = 3200, y = 0, w = 800, h = 350});
+            var idle = new Animation("idle", new []
+            {
+                sprite0, 
+                sprite1,
+                sprite2
+            }, .3f, false, false);
+            var activate = new Animation("activate", new []
+            {
+                sprite3,
+                sprite4,
+            }, 1f, true);
+            return new SceneMainGameEntity(null, new Animator(new Animation[] {idle, activate}, new Transition[] {}))
+            {
+                Position = new Vector2(400, 200),
+                Pivot = new Vector2(.5f, .5f),
+                FlyDistance = 2,
+            };
+        }
+
+        public static SceneGameEntity GetHola()
+        {
+            var sprite0 = _holaTexture.GetSprite(new SDL.SDL_Rect() {x = 0, y = 350, w = 200, h = 200});
+            var sprite1 = _holaTexture.GetSprite(new SDL.SDL_Rect() {x = 200, y = 350, w = 200, h = 200});
+            var sprite2 = _holaTexture.GetSprite(new SDL.SDL_Rect() {x = 400, y = 350, w = 200, h = 200});
+            var idle = new Animation("idle", new []
+            {
+                sprite0,
+                sprite1,
+                sprite2
+            }, .1f, false, false);
+            var entity = new SceneGameEntity(null, new Animator(new []{idle}, new Transition[] {}));
+            entity.Animator.PlayAnimation("idle");
+            return entity;
+        }
+
+        public static Scene GetScene3()
+        {
+            var girl = GetGirl();
+            var hola = GetHola();
+            hola.Position = new Vector2(150, 200);
+            hola.Pivot = new Vector2(.5f, .5f);
+            hola.FlyDistance = 30;
+            hola.Speed = 20;
+
+            var hola1 = GetHola();
+            hola1.Position = new Vector2(510, 110);
+            hola1.Pivot = new Vector2(.5f, .5f);
+            hola1.FlyDistance = 50;
+            hola1.Speed = 25;
+
+            var hola2 = GetHola();
+            hola2.Position = new Vector2(180, 350);
+            hola2.Pivot = new Vector2(.5f, .5f);
+            hola2.FlyDistance = 10;
+            hola2.Speed = 6;
+            return new Scene(new []{"хола"}, new []{girl, hola, hola1, hola2}, girl);
+        }
+
+        #endregion
+
+        #region Finish scene
+
+        public static Scene GetFinishScene()
+        {
+            var main = default(SceneMainGameEntity);
+            return new Scene(new []{"конец"}, new SpriteGameEntity[] {}, main);
+        }
+
+        #endregion
+
         //private static GameEntity GetCharacter()
         //{
         //    var birdTexture = Resources.LoadTexture("bird.png");
